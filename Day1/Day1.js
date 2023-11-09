@@ -4,6 +4,7 @@ const arr = syncReadFile("./Day1/Day1.txt");
 
 let elves = [];
 let currentElf = { calories: 0 };
+
 //Fill up the elves with their inventory
 arr.forEach((element) => {
   if (element == "") {
@@ -14,18 +15,20 @@ arr.forEach((element) => {
     currentElf.calories += parseInt(element);
   }
 });
-//Get the largest calorie carrying elf
 
-//Basic Max Element Code
-let maxCaloriesCarried = 0;
-elves.forEach((element) => {
-  if (element.calories > maxCaloriesCarried) {
-    maxCaloriesCarried = element.calories;
-  }
-});
+if (currentElf.calories > 0) {
+  elves.push(currentElf);
+}
+//Sort the calories desending
+const sortedArray = elves
+  .map((x) => x.calories)
+  .sort((a, b) => {
+    return b - a;
+  });
 
-//Refactored Max Element Code
-maxCaloriesCarried = Math.max(...elves.map((x) => x.calories));
+console.log("The most calories at one elf: " + sortedArray[0]);
 
-//Part 1 Answer
-console.log(maxCaloriesCarried);
+console.log(
+  "The top 3 calories summed: " +
+    (sortedArray[0] + sortedArray[1] + sortedArray[2])
+);

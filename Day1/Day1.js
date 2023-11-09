@@ -15,6 +15,8 @@ arr.forEach((element) => {
   }
 });
 //Get the largest calorie carrying elf
+
+//Basic Max Element Code
 let maxCaloriesCarried = 0;
 elves.forEach((element) => {
   if (element.calories > maxCaloriesCarried) {
@@ -22,4 +24,8 @@ elves.forEach((element) => {
   }
 });
 
+//Refactored Max Element Code
+maxCaloriesCarried = Math.max(...elves.map((x) => x.calories));
+
+//Part 1 Answer
 console.log(maxCaloriesCarried);

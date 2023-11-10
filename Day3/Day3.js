@@ -17,6 +17,8 @@ function getPriority(char) {
   return priority;
 }
 
+//Part 1
+
 let prioritySum = 0;
 arr.forEach((sack) => {
   let firstHalf = sack.slice(0, sack.length / 2);
@@ -30,3 +32,15 @@ arr.forEach((sack) => {
   }
 });
 console.log(prioritySum);
+
+//Part 2
+let groupBadgeSum = 0;
+for (i = 0; i < arr.length; i += 3) {
+  for (j = 0; j < arr[i].length; j++) {
+    if (arr[i + 1].includes(arr[i][j]) && arr[i + 2].includes(arr[i][j])) {
+      groupBadgeSum += getPriority(arr[i][j]);
+      break;
+    }
+  }
+}
+console.log(groupBadgeSum);

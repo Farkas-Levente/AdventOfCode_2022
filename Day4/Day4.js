@@ -25,7 +25,6 @@ for (i = 0; i < ranges.length; i += 2) {
     },
   });
 }
-console.log(pairs);
 
 //Solve the riddle
 let count = 0;
@@ -40,4 +39,34 @@ pairs.forEach((pair) => {
     count++;
   }
 });
-console.log(count);
+console.log("Total overlaps: " + count);
+
+//Part 2
+let secondCount = 0;
+//Go through the pairs
+pairs.forEach((pair) => {
+  //Extract the sections for better understanding
+  let firstSection = [];
+  let secondSection = [];
+  let overlap = false;
+  for (i = pair.firstPair.start; i <= pair.firstPair.end; i++) {
+    firstSection.push(i);
+  }
+  for (i = pair.secondPair.start; i <= pair.secondPair.end; i++) {
+    secondSection.push(i);
+  }
+
+  //Check if there is an overlap
+  firstSection.forEach((item) => {
+    if (secondSection.includes(item)) {
+      overlap = true;
+    }
+  });
+
+  //If there is, increment
+  if (overlap) {
+    secondCount++;
+  }
+});
+//Log The solution
+console.log("Any overlaps: " + secondCount);

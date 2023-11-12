@@ -33,13 +33,23 @@ arr.forEach((line) => {
 //Move the Crates
 
 commands.forEach((command) => {
-  MoveCrate(command.amount, command.from, command.to);
+  MoveCrate2(command.amount, command.from, command.to);
 });
 
 function MoveCrate(amount, from, to) {
   for (i = 0; i < amount; i++) {
-    const shifted = stacks[from].shift();
-    stacks[to].unshift(shifted);
+    const removedElement = stacks[from].shift();
+    stacks[to].unshift(removedElement);
   }
 }
+
+function MoveCrate2(amount, from, to) {
+  let temp = [];
+  for (i = 0; i < amount; i++) {
+    const removedElement = stacks[from].shift();
+    temp.push(removedElement);
+  }
+  stacks[to].unshift(...temp);
+}
+
 console.log(stacks);

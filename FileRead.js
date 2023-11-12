@@ -8,5 +8,8 @@ function syncReadFile(filename) {
 
   return arr;
 }
-
-module.exports = { syncReadFile };
+function readFileInAll(filename) {
+  const contents = readFileSync(filename, "utf-8");
+  return contents;
+}
+module.exports = { syncReadFile, readFileInAll };

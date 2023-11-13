@@ -2,55 +2,38 @@ const { readFileInAll } = require("../FileRead.js");
 
 const signals = readFileInAll("./Day6/Day6.txt");
 
-function Part1Solution() {
-  for (i = 3; i < signals.length; i++) {
-    let lastFour =
-      signals[i - 3] + signals[i - 2] + signals[i - 1] + signals[i];
-    let counter = {};
-    for (j = 0; j < lastFour.length; j++) {
-      if (counter[lastFour[j]] == undefined) {
-        counter = { ...counter, [lastFour[j]]: 1 };
-      } else {
-        counter[lastFour[j]]++;
-      }
-    }
-    if (
-      counter[lastFour[0]] === 1 &&
-      counter[lastFour[1]] === 1 &&
-      counter[lastFour[2]] === 1 &&
-      counter[lastFour[3]] === 1
-    ) {
-      console.log(i + 1);
-      break;
-    }
-  }
-}
-
-function Part2Solution() {
-  for (i = 13; i < signals.length; i++) {
-    let lastFourteen = "";
-    for (j = i - 13; j < i + 1; j++) {
-      lastFourteen += signals[j];
+function SolveSignals(letterAmount) {
+  //Go through all the letters
+  for (i = letterAmount; i < signals.length; i++) {
+    //Fill up the last given letters
+    let lastGivenLetters = "";
+    for (j = i - letterAmount; j < i; j++) {
+      lastGivenLetters += signals[j];
     }
 
+    //Store the letters types for a later check
     let counter = {};
-    for (j = 0; j < lastFourteen.length; j++) {
-      if (counter[lastFourteen[j]] == undefined) {
-        counter = { ...counter, [lastFourteen[j]]: 1 };
+    for (j = 0; j < lastGivenLetters.length; j++) {
+      if (counter[lastGivenLetters[j]] == undefined) {
+        counter = { ...counter, [lastGivenLetters[j]]: 1 };
       } else {
-        counter[lastFourteen[j]]++;
+        counter[lastGivenLetters[j]]++;
       }
     }
+    //Check if the sequence is correct
     let foundIt = true;
-    for (j = 0; j < 14; j++) {
-      if (counter[lastFourteen[j]] > 1) {
+    for (j = 0; j < letterAmount; j++) {
+      if (counter[lastGivenLetters[j]] > 1) {
         foundIt = false;
       }
     }
+    //If correct, we are done
     if (foundIt) {
-      console.log(i + 1);
+      console.log(i);
       return;
     }
   }
 }
-Part2Solution();
+
+SolveSignals(4);
+SolveSignals(14);

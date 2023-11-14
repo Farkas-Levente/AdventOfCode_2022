@@ -22,8 +22,18 @@ console.log("The sum: " + sum);
 
 //Solve Part 2
 const maxFileSpace = 70000000;
+const spaceNeeded = 30000000;
 const freeSpace = maxFileSpace - directories[0].size;
-console.log(freeSpace);
+const needsToBeFreed = spaceNeeded - freeSpace;
+
+let filteredDirectories = directories
+  .filter((dir) => dir.size >= needsToBeFreed)
+  .sort((a, b) => {
+    return b - a;
+  });
+
+console.log(filteredDirectories[filteredDirectories.length - 1].size);
+
 //A function for processing a line of data
 //Console Logs serve as debugging elements
 function readInLine(line) {
